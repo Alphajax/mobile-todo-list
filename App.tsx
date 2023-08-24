@@ -6,27 +6,27 @@
  */
 
 import React from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import TodoList from './src/layouts/ToDoList';
 
 function App(): JSX.Element {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.headerText}>Welcome to our app</Text>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>Active tasks</Text>
       <TodoList />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
+    paddingTop: 40,
     paddingBottom: 40,
     paddingLeft: 15,
     paddingRight: 15,
   },
   headerText: {
-    fontSize: 25,
+    fontSize: 44,
     textAlign: 'center',
   },
 });

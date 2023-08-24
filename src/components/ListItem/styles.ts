@@ -2,14 +2,17 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
-    paddingBottom: 8,
-    paddingTop: 8,
-    paddingLeft: 4,
-    paddingRight: 4,
+    height: 55,
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    flexDirection: 'row',
   },
   name: {
-    fontSize: 18,
+    color: '#293241',
+    flex: 0.85,
+    fontSize: 32,
   },
 });
 

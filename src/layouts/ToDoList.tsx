@@ -1,15 +1,24 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import ListItem from '../components/ListItem/ListItem';
 
 const TodoList = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ListItem />
       <ListItem />
       <ListItem />
       <ListItem />
-    </View>
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+    </ScrollView>
   );
 };
 
