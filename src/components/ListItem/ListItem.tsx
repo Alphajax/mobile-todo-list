@@ -12,7 +12,7 @@ const ListItem = () => {
         fillColor={colors.softBlue}
         unfillColor={colors.white}
         iconStyle={{borderColor: colors.softBlue}}
-        innerIconStyle={{borderWidth: 2}}
+        innerIconStyle={styles.innerIconStyle}
         onPress={(isChecked: boolean) => {
           console.log(isChecked);
         }}
