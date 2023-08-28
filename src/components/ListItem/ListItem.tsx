@@ -3,8 +3,9 @@ import {Text, View} from 'react-native';
 import styles from './styles';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import colors from '../../constants/colors';
+import {IListItemProps} from './types';
 
-const ListItem = () => {
+const ListItem = ({todo, toggleCompleteToDo}: IListItemProps) => {
   return (
     <View style={styles.container}>
       <BouncyCheckbox
@@ -13,11 +14,10 @@ const ListItem = () => {
         unfillColor={colors.white}
         iconStyle={{borderColor: colors.softBlue}}
         innerIconStyle={styles.innerIconStyle}
-        onPress={(isChecked: boolean) => {
-          console.log(isChecked);
-        }}
+        onPress={() => toggleCompleteToDo(todo.id)}
+        isChecked={todo.isCompleted}
       />
-      <Text style={styles.name}>List Item</Text>
+      <Text style={styles.name}>{todo.name}</Text>
     </View>
   );
 };

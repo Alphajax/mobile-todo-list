@@ -1,19 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import TodoList from './src/layouts/ToDoList';
+import TodoList from './src/layouts/ToDoList/ToDoList';
+import {ToDoListStore} from './src/store/ToDoListStore';
 
 function App(): JSX.Element {
+  const todoListStore = new ToDoListStore();
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Active tasks</Text>
-      <TodoList />
+      <TodoList store={todoListStore} />
     </View>
   );
 }
