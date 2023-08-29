@@ -7,7 +7,15 @@ function App(): JSX.Element {
   const todoListStore = new ToDoListStore();
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Active tasks</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.headerTextContainer}>
+          <Text style={styles.headerText}>Active tasks</Text>
+        </View>
+        <View style={styles.plusButtonContainer}>
+          <Text style={styles.plusButton}>+</Text>
+        </View>
+      </View>
+
       <TodoList store={todoListStore} />
     </View>
   );
@@ -23,6 +31,26 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 44,
     textAlign: 'center',
+  },
+  plusButton: {
+    fontSize: 40,
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: 'center',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+  },
+  plusButtonContainer: {
+    flex: 0.1,
+
+    height: 48,
+    width: 48,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  headerTextContainer: {
+    flex: 0.9,
   },
 });
 
