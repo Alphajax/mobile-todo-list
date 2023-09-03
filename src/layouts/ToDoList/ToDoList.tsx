@@ -5,9 +5,25 @@ import {useToggle} from 'react-use';
 import ListItem from '../../components/ListItem/ListItem';
 import {IToDoListProps} from './types';
 import CreateToDoModal from '../../components/CreateToDoModal/CreateToDoModal';
+import Toast from 'react-native-toast-message';
 
 const TodoList = ({store}: IToDoListProps) => {
   const [isModalVisible, toggleIsModalVisible] = useToggle(false);
+
+  const showCreateItemError = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'not all required fields are filled',
+    });
+  };
+
+  const showCreateItemSuccess = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Successfully create',
+    });
+  };
+
   return (
     <View>
       <View style={styles.headerContainer}>
@@ -33,7 +49,10 @@ const TodoList = ({store}: IToDoListProps) => {
         isOpened={isModalVisible}
         toggleModalVisibility={toggleIsModalVisible}
         store={store}
+        showCreateItemError={showCreateItemError}
+        showCreateItemSuccess={showCreateItemSuccess}
       />
+      <Toast />
     </View>
   );
 };

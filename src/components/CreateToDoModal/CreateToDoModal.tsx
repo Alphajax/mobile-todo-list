@@ -1,17 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from 'react-native';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {ICreateToDoModalProps} from './types';
 import styles from './styles';
+import {IToDo} from '../../types/ToDoList/ToDoList.types';
+import {selectListData} from './constants';
 
 const CreateToDoModal = ({
   isOpened,
   toggleModalVisibility,
   store,
+  showCreateItemError,
+  showCreateItemSuccess,
 }: ICreateToDoModalProps): JSX.Element => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
+
+  useEffect(() => {
+    if (!isOpened) {
+      setName('');
+      setDescription('');
+      setPriority('');
+    }
+  }, [isOpened]);
+
+  const vlidateItemBeforeCreate = (item: Partial<IToDo>): boolean => {
+    if (!item.name || !item.id || !item.priority) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -48,20 +68,7 @@ const CreateToDoModal = ({
             <SelectList
               boxStyles={styles.boxStyles}
               dropdownStyles={styles.dropdownStyles}
-              data={[
-                {
-                  key: 0,
-                  value: 'high',
-                },
-                {
-                  key: 1,
-                  value: 'medium',
-                },
-                {
-                  key: 2,
-                  value: 'low',
-                },
-              ]}
+              data={selectListData}
               setSelected={setPriority}
             />
           </View>
@@ -69,13 +76,16 @@ const CreateToDoModal = ({
             style={[styles.button, styles.buttonClose]}
             onPress={() => {
               toggleModalVisibility(!isOpened);
-              store.createToDo({
+              const itemToBeCreated = {
                 id: `${new Date().getTime()}`,
                 name,
                 description,
                 priority: +priority,
                 isCompleted: false,
-              });
+              };
+              vlidateItemBeforeCreate(itemToBeCreated)
+                ? (store.createToDo(itemToBeCreated), showCreateItemSuccess())
+                : showCreateItemError();
             }}>
             <Text style={styles.textStyle}>Save</Text>
           </Pressable>

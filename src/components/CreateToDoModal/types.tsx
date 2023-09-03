@@ -4,4 +4,6 @@ export interface ICreateToDoModalProps {
   isOpened: boolean;
   toggleModalVisibility: (isVisible?: boolean) => void;
   store: IToDoListStore;
+  showCreateItemError: () => void;
+  showCreateItemSuccess: () => void;
 }

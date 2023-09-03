@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     marginTop: 20,
+    height: 50,
+    width: 150,
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
@@ -53,6 +55,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    fontSize: 25,
   },
   modalText: {
     marginBottom: 15,
