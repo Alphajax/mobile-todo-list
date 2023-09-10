@@ -7,7 +7,7 @@ import {IToDoListProps} from './types';
 import CreateToDoModal from '../../components/CreateToDoModal/CreateToDoModal';
 import Toast from 'react-native-toast-message';
 
-const TodoList = ({store}: IToDoListProps) => {
+const TodoList = ({store, navigation}: IToDoListProps) => {
   const [isModalVisible, toggleIsModalVisible] = useToggle(false);
 
   const showCreateItemError = () => {
@@ -24,11 +24,19 @@ const TodoList = ({store}: IToDoListProps) => {
     });
   };
 
+  const onQuestionButtonClick = () => {
+    navigation.navigate('Details');
+  };
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerTextContainer}>
           <Text style={styles.headerText}>Active tasks</Text>
+        </View>
+        <View style={styles.plusButtonContainer}>
+          <Pressable onPress={onQuestionButtonClick}>
+            <Text style={styles.plusButton}>?</Text>
+          </Pressable>
         </View>
         <View style={styles.plusButtonContainer}>
           <Pressable onPress={toggleIsModalVisible}>
@@ -60,6 +68,10 @@ const TodoList = ({store}: IToDoListProps) => {
 const styles = StyleSheet.create({
   container: {
     height: 560,
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   headerText: {
     fontSize: 44,

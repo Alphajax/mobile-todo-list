@@ -1,24 +1,27 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import TodoList from './src/layouts/ToDoList/ToDoList';
 import {ToDoListStore} from './src/store/ToDoListStore';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ListDetails from './src/layouts/ListDetails/ListDetails';
+import {RootStackParamList} from './src/types/navigation/types';
 
 function App(): JSX.Element {
   const todoListStore = new ToDoListStore();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
+
   return (
-    <View style={styles.container}>
-      <TodoList store={todoListStore} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator id="todo-navigator">
+        <Stack.Screen name="ToDoList">
+          {props => <TodoList {...props} store={todoListStore} />}
+        </Stack.Screen>
+        <Stack.Screen name="Details">
+          {props => <ListDetails {...props} store={todoListStore} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 40,
-    paddingBottom: 40,
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-});
 
 export default App;
