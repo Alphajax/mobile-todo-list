@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {observer} from 'mobx-react-lite';
 import {useToggle} from 'react-use';
@@ -10,22 +10,18 @@ import Toast from 'react-native-toast-message';
 const TodoList = ({store, navigation}: IToDoListProps) => {
   const [isModalVisible, toggleIsModalVisible] = useToggle(false);
 
-  const showCreateItemError = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'not all required fields are filled',
-    });
-  };
-
-  const showCreateItemSuccess = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Successfully create',
-    });
-  };
-
   const onQuestionButtonClick = () => {
     navigation.navigate('Details');
+  };
+
+  useEffect(() => {
+    isModalVisible
+      ? navigation.navigate('Create')
+      : navigation.navigate('ToDoList');
+  }, [isModalVisible]);
+
+  const showListItemDetails = (id: string) => {;
+    navigation.navigate('Details', {id, store});
   };
   return (
     <View style={styles.container}>
@@ -50,24 +46,17 @@ const TodoList = ({store, navigation}: IToDoListProps) => {
             todo={todo}
             key={todo.id}
             toggleCompleteToDo={store.toggleCompleteToDo}
+            showListItemDetails={() => showListItemDetails(todo.id)}
           />
         ))}
       </ScrollView>
-      <CreateToDoModal
-        isOpened={isModalVisible}
-        toggleModalVisibility={toggleIsModalVisible}
-        store={store}
-        showCreateItemError={showCreateItemError}
-        showCreateItemSuccess={showCreateItemSuccess}
-      />
-      <Toast />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 560,
+    height: 600,
     paddingTop: 40,
     paddingBottom: 40,
     paddingLeft: 15,

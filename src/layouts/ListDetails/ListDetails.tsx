@@ -5,14 +5,21 @@ import {observer} from 'mobx-react-lite';
 import styles from './styles';
 import DescribedListItem from '../../components/DescribedListItem/DescribedListItem';
 
-const ListDetails = ({store, navigation}: IListDetailsProps): JSX.Element => {
+const ListDetails = ({
+  store,
+  navigation,
+  route,
+}: IListDetailsProps): JSX.Element => {
+  const id = route.params.id;
   return (
     <View>
       <Text style={styles.header}>TODO Items with Additional info</Text>
       <ScrollView style={styles.todosContainer}>
-        {store.todos.map(todo => (
-          <DescribedListItem {...todo} />
-        ))}
+        {!id ? (
+          store.todos.map(todo => <DescribedListItem {...todo} key={todo.id} />)
+        ) : (
+          <DescribedListItem {...store.todos.find(item => item.id === id)} />
+        )}
       </ScrollView>
     </View>
   );

@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   innerIconStyle: {borderWidth: 2},
+
 });
 
 export default styles;

@@ -6,5 +6,9 @@ export type RootStackParamList = {
   };
   Details: {
     store: IToDoListStore;
+    id?: string;
+  };
+  Create: {
+    store: IToDoListStore;
   };
 };

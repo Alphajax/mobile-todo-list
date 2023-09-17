@@ -1,11 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import styles from './styles';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import colors from '../../constants/colors';
 import {IListItemProps} from './types';
 
-const ListItem = ({todo, toggleCompleteToDo}: IListItemProps) => {
+const ListItem = ({
+  todo,
+  toggleCompleteToDo,
+  showListItemDetails,
+}: IListItemProps) => {
   return (
     <View style={styles.container}>
       <BouncyCheckbox
@@ -17,7 +21,9 @@ const ListItem = ({todo, toggleCompleteToDo}: IListItemProps) => {
         onPress={() => toggleCompleteToDo(todo.id)}
         isChecked={todo.isCompleted}
       />
-      <Text style={styles.name}>{todo.name}</Text>
+      <Pressable onPress={showListItemDetails}>
+        <Text style={styles.name}>{todo.name}</Text>
+      </Pressable>
     </View>
   );
 };
